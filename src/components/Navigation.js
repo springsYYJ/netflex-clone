@@ -1,25 +1,38 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Form, Nav, Navbar } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { movieSearchAction } from '../redux/actions/movieSearchAction';
+import { movieAction } from '../redux/actions/movieAction';
 
 const Navigation = () => {
     const [keyword, setKeyword] = useState('');
     const navigate = useNavigate() // <-- hooks must be INSIDE the component
     const dispatch = useDispatch();
 
+
     const searchMovie = (event) => {
-        dispatch(movieSearchAction.searchMovie({keyword}));
+        if (keyword == '') {
+            dispatch(movieSearchAction.setSearchKeyword({ keyword }));
+            dispatch(movieAction.getMovies(1))
+        } else {
+            dispatch(movieSearchAction.setSearchKeyword({ keyword }));
+            navigate('/movies')
+        }
+
     }
 
-    const onEnterPress = (event) =>{
+    const onEnterPress = (event) => {
         if (event.key === 'Enter') {
             event.preventDefault();
-            dispatch(movieSearchAction.searchMovie({keyword}));
-            navigate('/movies');
+            if (event.target.value == '') {
+                dispatch(movieSearchAction.setSearchKeyword({ keyword }));
+                dispatch(movieAction.getMovies(1))
+            } else {
+                dispatch(movieSearchAction.setSearchKeyword({keyword:event.target.value}));
+            }
         }
     }
     return (
@@ -40,7 +53,7 @@ const Navigation = () => {
 
                     <Button variant="outline-light" className="me-2">KO</Button>
                     <Form className="d-flex" >
-                        <Form.Control onChange={(event) => setKeyword(event.target.value)} onKeyPress={(event) => onEnterPress(event)}
+                        <Form.Control onKeyPress={(event) => onEnterPress(event)}
                             type="search"
                             placeholder="Search"
                             className="me-2"

@@ -6,23 +6,31 @@ import ClipLoader from "react-spinners/ClipLoader";
 import MovieCard2 from '../components/MovieCard2';
 import MoviesButton from '../components/MoviesButton';
 import { movieAction } from '../redux/actions/movieAction';
+import { movieSearchAction } from '../redux/actions/movieSearchAction';
 
 const Movies = () => {
   let { popularMovies, loading } = useSelector(state => state.movie);
-  let { searchMovie } = useSelector(state => state.search);
-  if(searchMovie.results){
-    popularMovies = searchMovie
-  }
+  let { searchMovie, keyword } = useSelector(state => state.search);
 
   const dispatch = useDispatch();
+
+  if (searchMovie.results && keyword) {
+    popularMovies = searchMovie
+  }
   useEffect(() => {
-    dispatch(movieAction.getMovies({ page }))
-  }, []);
+    if(keyword){
+      dispatch(movieSearchAction.searchMovie({ keyword, page }))
+    }
+  }, [keyword]);
 
   const [page, setPage] = useState(1);
   const handlePageChange = (page) => {
     setPage(page);
-    dispatch(movieAction.getMovies({ page }))
+    if (keyword) {
+      dispatch(movieSearchAction.searchMovie({ keyword, page }));
+    } else {
+      dispatch(movieAction.getMovies({ page }))
+    }
   };
   if (loading) {
     return <ClipLoader color="{black}" loading={loading} size={150} />
@@ -52,7 +60,7 @@ const Movies = () => {
             <div className='pagenation'>
               <Pagination
                 activePage={page}
-                itemsCountPerPage={20}
+                itemsCountPerPage={popularMovies.results.length}
                 totalItemsCount={10000}
                 pageRangeDisplayed={5}
                 onChange={handlePageChange}

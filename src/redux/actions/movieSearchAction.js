@@ -2,17 +2,19 @@ import api from "../api";
 
 const API_KEY = process.env.REACT_APP_API_KEY
 
-function searchMovie( {keyword} ) {
-    console.log('LANGUAGE', API_KEY)
+function searchMovie({ keyword, page }) {
     return async (dispatch) => {
+        if (!page) {
+            page = 1
+        }
         try {
             dispatch({ type: "SEARCH_MOVIE_REQUEST" })
-            console.log('test')
-            const searchMovieApi =await api.get(`/search/movie?api_key=${API_KEY}&language=en-US&query=${keyword}`)
+            const searchMovieApi = await api.get(`/search/movie?api_key=${API_KEY}&language=en-US&query=${keyword}&page=${page}`);
             dispatch({
                 type: "SEARCH_MOVIE_SUCCESS",
                 payload: {
                     searchMovie: searchMovieApi.data,
+                    keyword: keyword,
                     loading: false
                 }
             })
@@ -25,4 +27,11 @@ function searchMovie( {keyword} ) {
     }
 }
 
-export const movieSearchAction = { searchMovie, }
+function setSearchKeyword( {keyword}) {
+    return (dispatch) => {
+        console.log('set key action', keyword )
+        dispatch({ type: "SET_SEARCH_KEYWORD", payload:  {keyword}  })
+    }
+}
+
+export const movieSearchAction = { searchMovie, setSearchKeyword }
