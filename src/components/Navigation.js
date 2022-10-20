@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Container, Form, Nav, Navbar } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
-import { movieSearchAction } from '../redux/actions/movieSearchAction';
+import { Link, useNavigate } from 'react-router-dom';
 import { movieAction } from '../redux/actions/movieAction';
+import { movieSearchAction } from '../redux/actions/movieSearchAction';
 
 const Navigation = () => {
     const [keyword, setKeyword] = useState('');
@@ -14,25 +13,21 @@ const Navigation = () => {
 
 
     const searchMovie = (event) => {
+        event.preventDefault();
+        dispatch(movieSearchAction.setSearchKeyword({ keyword }));
         if (keyword == '') {
-            dispatch(movieSearchAction.setSearchKeyword({ keyword }));
             dispatch(movieAction.getMovies(1))
         } else {
-            dispatch(movieSearchAction.setSearchKeyword({ keyword }));
             navigate('/movies')
+
         }
 
     }
-
     const onEnterPress = (event) => {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            if (event.target.value == '') {
-                dispatch(movieSearchAction.setSearchKeyword({ keyword }));
-                dispatch(movieAction.getMovies(1))
-            } else {
-                dispatch(movieSearchAction.setSearchKeyword({keyword:event.target.value}));
-            }
+        event.preventDefault();
+        if (event.key == 'Enter') {
+            dispatch(movieSearchAction.setSearchKeyword({ keyword }));
+            navigate('/movies')
         }
     }
     return (
@@ -52,14 +47,14 @@ const Navigation = () => {
                     </Nav>
 
                     <Button variant="outline-light" className="me-2">KO</Button>
-                    <Form className="d-flex" >
-                        <Form.Control onKeyPress={(event) => onEnterPress(event)}
-                            type="search"
+                    <Form className="d-flex" onSubmit={searchMovie}>
+                        <Form.Control onChange={(event) => { setKeyword(event.target.value) }} onKeyPress={(event) => onEnterPress(event)}
+                            type="text"
                             placeholder="Search"
                             className="me-2"
                             aria-label="Search"
                         />
-                        <Button variant="outline-danger" onClick={searchMovie}>Search</Button>
+                        <Button variant="outline-danger" type='submit' >Search</Button>
                     </Form>
                 </Navbar.Collapse>
             </Container>
