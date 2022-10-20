@@ -1,38 +1,354 @@
-.App {
-  text-align: center;
+.root {
+  background-color: #080808;
+  color: #e5e5e5;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.nav-item {
+  color: #e5e5e5;
+  text-decoration: none;
+  margin-right: 20px;
+
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.nav-item:hover {
+  color: dimgray;
+}
+
+.banner {
+  height: 600px;
+  display: flex;
+  align-items: center;
+}
+
+.banner::before {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 600px;
+  content: '';
+  background: linear-gradient(to right, #080808, transparent);
+}
+
+.banner-info {
+  width: 40%;
+  margin-left: 30px;
+  z-index: 1;
+}
+
+.card {
+  width: 220px;
+  height: 330px;
+  background-position: center;
+}
+
+.card2 {
+  width: 320px;
+  height: 430px;
+  background-size: cover;
+}
+
+.overlay {
+  opacity: 0;
+  width: 100%;
+}
+
+.card:hover .overlay {
+  opacity: 1;
+}
+
+.card:hover {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+
+}
+
+.detail_poster {
+  display: flex;
+  justify-content: center;
+}
+
+.movie_social_details {
+  display: flex;
+
+}
+
+.movie_social_list {
+  display: flex;
+  list-style-type: none;
+}
+
+.movie_social_list li {
+  padding: 10px;
+}
+
+.movie_info_list {
+  list-style-type: none;
+}
+
+.review_info {
+  border: 4px solid white;
+  padding: 40px;
+}
+
+.trailerModal {
+  min-width: 90%;
+}
+
+.moviesButton {
+  min-width: 100%;
+  width: 100%;
+  display: flex;
+  margin: 20px;
+  text-align: left;
+}
+
+.movie-section-wrapper {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.movie-section {
+  display: flex;
+  justify-content: space-between;
+  background-size: cover;
+}
+
+.movie_header {
+  position: relative;
+  padding-top: 25px;
+  padding-left: 25px;
+
+}
+.movie_header span {
+  margin-right: 10px;
+}
+
+.movie_card .info_section .movie_header .locandina {
+  position: relative;
+  float: left;
+  margin-right: 20px;
+  height: 80px;
+  box-shadow: 0 0 20px -10px rgba(0, 0, 0, 0.5);
+}
+
+.movie_card {
+  position: relative;
+  display: block;
+  height:100%;
+  
+  max-height: 550px;
+  overflow: hidden;
+  border-radius: 10px;
+  transition: all 0.4s;
+  /* margin-left: 30px; */
+  margin-bottom: 30px;
+}
+
+
+.movie_card:hover {
+  transform: scale(1.02);
+  transition: all 0.4s;
+}
+
+
+.movie_card .info_section {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-blend-mode: multiply;
+  z-index: 2;
+  border-radius: 10px;
+}
+
+.movie_card .info_section .movie_header {
+  position: relative;
+  padding-top: 25px;
+  padding-left: 25px;
+  
+}
+
+.movie_card .info_section .movie_header h1 {
+  color: #fff;
+  font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  font-size: 15px !important;
+  text-transform: uppercase;
+  font-size: 25px !important;
+}
+
+.movie_card .info_section .movie_header h4 {
+  color: #9ac7fa;
+  font-weight: 400;
+  font-size: 13px;
+  margin-bottom: 40px;
+}
+
+
+.movie-section .info_section .movie_desc::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.movie_social {
+  height: 10%;
+  padding-left: 15px;
+  padding-bottom: 20px;
+  padding-top: 15px;
+  font-family: "Lato", sans-serif;
+  font-weight: lighter;
+}
+
+.movie_card .blur_back {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  height: 100%;
+  right: 0;
+  background-size: cover;
+  border-radius: 11px;
+}
+
+
+@media screen and (min-width: 768px) {
+    .movie_header {
+        width: 70%;
+    }
+    .movie_desc {
+        width: 60%;
+    }
+    .info_section {
+        background: linear-gradient(to right, #0d0d0c 50%, transparent 100%);
+    }
+    .blur_back {
+        width: 80%;
+        background-position: -100% 10% !important;
+    }
+}
+@media screen and (max-width: 768px) {
+  .movie_card {
+      width: 95%;
+      
+      min-height: 350px;
+      height: auto;
+  }
+  .blur_back {
+      width: 100%;
+      background-position: 50% 50% !important;
+  }
+  .movie_header {
+      width: 100%;
+      margin-top: 85px;
+  }
+  .movie_desc {
+      width: 100%;
+  }
+  .info_section {
+      background: linear-gradient(to top, #141413 50%, transparent 100%);
+      display: inline-grid;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.movie_card .info_section .movie_desc {
+  padding-left: 25px;
+
+}
+
+.movie-section .info_section .movie_desc::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.movie-section .info_section .movie_desc::-webkit-scrollbar-thumb,
+.movie-section .info_section .movie_desc::-webkit-scrollbar-thumb:hover {
+  background: #e50914;
+}
+
+.movie_desc::-webkit-scrollbar {
+  width: 10px;
+}
+
+.movie_card .info_section .movie_desc .text {
+  color: #cfd6e1;
+}
+
+
+.movie_card .info_section .movie_desc {
+  padding-left: 25px;
+
+}
+
+.movie-section .info_section .movie_desc::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.movie-section .info_section .movie_desc::-webkit-scrollbar-thumb,
+.movie-section .info_section .movie_desc::-webkit-scrollbar-thumb:hover {
+  background: #e50914;
+}
+
+.movie_desc::-webkit-scrollbar {
+  width: 10px;
+}
+
+.movie_card .info_section .movie_desc .text {
+  color: #cfd6e1;
+}
+
+
+.pagination {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  margin-top: 15px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul.pagination li {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #e2e2e2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+}
+
+ul.pagination li:first-child{
+  border-radius: 5px 0 0 5px;
+}
+
+ul.pagination li:last-child{
+  border-radius: 0 5px 5px 0;
+}
+
+ul.pagination li a {
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+}
+
+ul.pagination li.active a {
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+ul.pagination li.active {
+  background-color: #DC3545;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+ul.pagination li a:hover,
+ul.pagination li a.active {
+  color: blue;
+}
+
+.page-selection {
+  width: 48px;
+  height: 30px;
+  color: white;
 }
