@@ -24,7 +24,6 @@ const Navigation = () => {
 
     }
     const onEnterPress = (event) => {
-        event.preventDefault();
         if (event.key == 'Enter') {
             dispatch(movieSearchAction.setSearchKeyword({ keyword }));
             navigate('/movies')
@@ -49,7 +48,7 @@ const Navigation = () => {
                     <Button variant="outline-light" className="me-2">KO</Button>
                     <Form className="d-flex" onSubmit={searchMovie}>
                         <Form.Control onChange={(event) => { setKeyword(event.target.value) }} onKeyPress={(event) => onEnterPress(event)}
-                            type="text"
+                            type="input"
                             placeholder="Search"
                             className="me-2"
                             aria-label="Search"

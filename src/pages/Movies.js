@@ -18,7 +18,7 @@ const Movies = () => {
     popularMovies = searchMovie
   }
   useEffect(() => {
-    if(keyword){
+    if (keyword) {
       dispatch(movieSearchAction.searchMovie({ keyword, page }))
     }
   }, [keyword]);
@@ -59,9 +59,9 @@ const Movies = () => {
           <Col lg={8}>
             <div className='pagenation'>
               <Pagination
-                activePage={page}
+                activePage={popularMovies.page}
                 itemsCountPerPage={popularMovies.results.length}
-                totalItemsCount={10000}
+                totalItemsCount={popularMovies.total_results > 500 ? 10000 : popularMovies.total_results} // 페이징수는 totalItemsCount/itemsCountPerPage(10000/20 = 500)으로 계산된다. 최대값 500 
                 pageRangeDisplayed={5}
                 onChange={handlePageChange}
               />
