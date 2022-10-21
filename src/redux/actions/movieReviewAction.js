@@ -7,7 +7,6 @@ function getReview( {id} ) {
         try {
             dispatch({ type: "GET_MOVIE_REVIEW_REQUEST" })
             const movieReviewApi =await api.get(`/movie/${id}/reviews?api_key=${API_KEY}&language=en-US&page=1`)
-            console.log('movieReviewApi', movieReviewApi);
             dispatch({
                 type: "GET_MOVIE_REVIEW_SUCCESS",
                 payload: {

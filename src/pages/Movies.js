@@ -9,21 +9,25 @@ import { movieAction } from '../redux/actions/movieAction';
 import { movieSearchAction } from '../redux/actions/movieSearchAction';
 
 const Movies = () => {
-  let { popularMovies, loading } = useSelector(state => state.movie);
-  let { searchMovie, keyword } = useSelector(state => state.search);
-
   const dispatch = useDispatch();
+  const [page, setPage] = useState(1);
 
-  if (searchMovie.results && keyword) {
-    popularMovies = searchMovie
-  }
   useEffect(() => {
     if (keyword) {
       dispatch(movieSearchAction.searchMovie({ keyword, page }))
     }
   }, [keyword]);
 
-  const [page, setPage] = useState(1);
+  const { popularMovies, loading } = useSelector(state => state.movie);
+  const { searchMovie, keyword } = useSelector(state => state.search);
+  let movieList = {};
+
+  if (searchMovie.results && keyword) {
+    movieList = searchMovie
+  } else {
+    movieList = popularMovies
+  }
+
   const handlePageChange = (page) => {
     setPage(page);
     if (keyword) {
@@ -45,7 +49,7 @@ const Movies = () => {
           <Col lg={8}>
             <div className='movie-section'>
               <Row>
-                {popularMovies.results.map(item => (
+                {movieList.results.map(item => (
                   <Col lg={6}>
                     <MovieCard2 item={item} />
                   </Col>
@@ -59,9 +63,9 @@ const Movies = () => {
           <Col lg={8}>
             <div className='pagenation'>
               <Pagination
-                activePage={popularMovies.page}
-                itemsCountPerPage={popularMovies.results.length}
-                totalItemsCount={popularMovies.total_results > 500 ? 10000 : popularMovies.total_results} // 페이징수는 totalItemsCount/itemsCountPerPage(10000/20 = 500)으로 계산된다. 최대값 500 
+                activePage={movieList.page}
+                itemsCountPerPage={movieList.results.length}
+                totalItemsCount={movieList.total_results > 500 ? 10000 : movieList.total_results} // 페이징수는 totalItemsCount/itemsCountPerPage(10000/20 = 500)으로 계산된다. 최대값 500 
                 pageRangeDisplayed={5}
                 onChange={handlePageChange}
               />

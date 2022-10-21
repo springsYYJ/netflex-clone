@@ -8,15 +8,14 @@ import MovieCard from './MovieCard';
 
 const Recommendation = () => {
     const dispatch = useDispatch();
-    let id = useParams('id');
     const { recommend, loading } = useSelector(state => state.recommend);
 
-    console.log('recommend', recommend)
+    let id = useParams('id');
     useEffect(() => {
         dispatch(movieRecommendAction.getRecommend(id));
 
     }, []);
-
+    
     if (loading) {
         return <ClipLoader color="{black}" loading={loading} size={150} />
     }

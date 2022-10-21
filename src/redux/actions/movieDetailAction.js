@@ -3,7 +3,6 @@ import api from "../api";
 const API_KEY = process.env.REACT_APP_API_KEY
 
 function getMovieDetail( {id} ) {
-    console.log('LANGUAGE', API_KEY)
     return async (dispatch) => {
         try {
             dispatch({ type: "GET_MOVIE_DETAIL_REQUEST" })

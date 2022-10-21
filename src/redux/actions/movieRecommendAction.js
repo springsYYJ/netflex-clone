@@ -7,7 +7,6 @@ function getRecommend( {id} ) {
         try {
             dispatch({ type: "GET_MOVIE_RECOMMEND_REQUEST" })
             const movieRecommendApi =await api.get(`/movie/${id}/recommendations?api_key=${API_KEY}&language=en-US&page=1`)
-            console.log('movieRecommendApi', movieRecommendApi);
             dispatch({
                 type: "GET_MOVIE_RECOMMEND_SUCCESS",
                 payload: {

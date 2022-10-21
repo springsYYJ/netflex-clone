@@ -6,16 +6,15 @@ import YouTube from 'react-youtube';
 import { movieVideosAction } from '../redux/actions/movieVideosAction';
 
 const Trailer = () => {
-    let id = useParams('id');
     const dispatch = useDispatch();
     const { video, loading } = useSelector(state => state.video);
 
-    console.log('video', video )
+    let id = useParams('id');
     useEffect(() => {
         dispatch(movieVideosAction.getVideoId(id));
 
     }, []);
-    
+
     const onPlayerReady = (event) => {
         event.target.playVideo();
     }
@@ -27,7 +26,7 @@ const Trailer = () => {
             autoplay: 1,
         },
     };
-  
+
     if (loading) {
         return <ClipLoader color="{black}" loading={loading} size={150} />
     }

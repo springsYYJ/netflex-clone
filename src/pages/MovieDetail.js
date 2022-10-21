@@ -22,8 +22,6 @@ const MovieDetail = () => {
   const { detail, loading } = useSelector(state => state.detail);
   const { genreList } = useSelector(state => state.movie);
 
-  console.log('detail', detail)
-  console.log('genreList', genreList)
   useEffect(() => {
     dispatch(movieDetailAction.getMovieDetail(id));
     dispatch(movieAction.getMovies(1));

@@ -6,10 +6,9 @@ import { movieReviewAction } from '../redux/actions/movieReviewAction';
 
 const Review = () => {
     const dispatch = useDispatch();
-    let id = useParams('id');
     const { review, loading } = useSelector(state => state.review);
-
-    console.log('review', review)
+    
+    let id = useParams('id');
     useEffect(() => {
         dispatch(movieReviewAction.getReview(id));
 

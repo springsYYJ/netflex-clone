@@ -8,7 +8,6 @@ function movieVideoReducer(state = initialState, action) {
         case "GET_MOVIE_VIDEO_REQUEST":
             return { ...state, loading: true }
         case "GET_MOVIE_VIDEO_SUCCESS":
-            console.log('payload.video', payload.video)
             return {
                 ...state,
                 video: payload.video,

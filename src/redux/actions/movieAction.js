@@ -4,7 +4,6 @@ const API_KEY = process.env.REACT_APP_API_KEY
 
 function getMovies({page}) {
     return async (dispatch) => {
-        console.log('API_KEY', API_KEY)
         try {
             dispatch({ type: "GET_MOVIES_REQUEST" })
             const popularMovieApi = api.get(`/movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`)

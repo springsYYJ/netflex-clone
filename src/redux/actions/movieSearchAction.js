@@ -27,10 +27,10 @@ function searchMovie({ keyword, page }) {
     }
 }
 
-function setSearchKeyword( {keyword}) {
+function setSearchKeyword({ keyword }) {
     return (dispatch) => {
-        console.log('set key action', keyword )
-        dispatch({ type: "SET_SEARCH_KEYWORD", payload:  {keyword}  })
+        console.log('set key action', keyword)
+        dispatch({ type: "SET_SEARCH_KEYWORD", payload: { keyword } })
     }
 }
 
