@@ -45,7 +45,7 @@ const MovieDetail = () => {
             <div>
               <div>
                 {detail.genres.map(genre => (
-                  <Badge bg="danger">
+                  <Badge key={genre.id} bg="danger">
                     {genre.name}
                   </Badge>
                 ))}

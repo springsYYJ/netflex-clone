@@ -18,7 +18,7 @@ const MovieCard = ({ item }) => {
             <div className="overlay" >
                 <h4>{item.title}</h4>
                 <div>{item.genre_ids.map(id => (
-                    <Badge bg="danger">
+                    <Badge key={id} bg="danger">
                         {genreList.find(item => item.id == id).name}
                     </Badge>
                 ))}

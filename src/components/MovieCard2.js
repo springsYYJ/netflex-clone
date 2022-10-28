@@ -1,11 +1,10 @@
 import React from 'react';
 import Badge from 'react-bootstrap/Badge';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import MovieSocialInfo from './MovieSocialInfo';
 
 const MovieCard = ({ item }) => {
-    const dispatch = useDispatch();
     const { genreList } = useSelector(state => state.movie);
     const navigate = useNavigate();
     const goMovieDetail = () => {
@@ -23,13 +22,13 @@ const MovieCard = ({ item }) => {
                         <time dateTime='1664463600000'>{item.release_date.substr(0, 4)}</time>
                     </h4>
                     {item.genre_ids.map(id => (
-                        <Badge bg="danger">
+                        <Badge key={id} bg="danger">
                             {genreList.find(item => item.id == id).name}
                         </Badge>
                     ))}
                 </div>
                 <div className='movie_desc'>
-                    <p class="text">{item.overview}</p>
+                    <p >{item.overview}</p>
                 </div>
                 <div className='movie_social'>
                     <MovieSocialInfo detail={item} />

@@ -15,17 +15,17 @@ const Recommendation = () => {
         dispatch(movieRecommendAction.getRecommend(id));
 
     }, []);
-    
+
     if (loading) {
         return <ClipLoader color="{black}" loading={loading} size={150} />
     }
     return (
         <div className='review_info' >
             <Container >
-                <Row className='test'>
-                    {recommend.map(item => (
+                <Row>
+                    {recommend.map((item) => (
                         <Col lg={6}>
-                            <MovieCard item={item} />
+                            <MovieCard key={item.id} item={item} />
                         </Col>
                     ))}
                 </Row>
